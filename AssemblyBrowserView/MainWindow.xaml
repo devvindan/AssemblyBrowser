@@ -3,10 +3,32 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:AssemblyBrowserView"
+        xmlns:local="clr-namespace:AssemblyBrowserLibrary"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="600" Width="900">
+    <Window.Resources>
+
+    </Window.Resources>
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="343*"/>
+            <ColumnDefinition Width="13*"/>
+            <ColumnDefinition Width="161*"/>
+        </Grid.ColumnDefinitions>
+        <Button Content="Show" Margin="10,500,39,36" Command="{Binding OpenCommand}" Grid.Column="2"/>
+
+        <StackPanel DataContext="{Binding Result}" Margin="4,0,0,69" Orientation="Horizontal" Grid.ColumnSpan="3">
+            <TreeView x:Name="MainTreeView" HorizontalAlignment="Stretch" Margin="10" VerticalAlignment="Stretch"
+                      ItemsSource="{Binding Namespaces}" Width="592">
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate ItemsSource="{Binding DataTypes}">
+                        <StackPanel>
+                            <Label Content="{Binding Path=Name}" />
+                            <Label Content="{Binding Path=DataTypeInfo}"/>
+                        </StackPanel>
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
+            </TreeView>
+        </StackPanel>
     </Grid>
 </Window>
