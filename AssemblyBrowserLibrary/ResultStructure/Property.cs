@@ -6,6 +6,7 @@ using System.Reflection;
 
 namespace AssemblyBrowserLibrary.ResultStructure
 {
+    // result structure for properties
     public class Property
     {
         public string name;

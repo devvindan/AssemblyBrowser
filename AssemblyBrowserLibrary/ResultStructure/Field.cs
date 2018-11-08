@@ -7,7 +7,7 @@ using System.Reflection;
 
 namespace AssemblyBrowserLibrary.ResultStructure
 {
-    // Result structure for "field"
+    // Result structure for fields
     public class Field
     {
         public string name;

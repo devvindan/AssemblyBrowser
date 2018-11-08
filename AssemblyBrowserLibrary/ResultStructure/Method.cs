@@ -7,7 +7,8 @@ using System.Reflection;
 
 namespace AssemblyBrowserLibrary.ResultStructure
 {
-    class Method
+    // result structure for methods
+    public class Method
     {
         public string name;
         public string signature;
