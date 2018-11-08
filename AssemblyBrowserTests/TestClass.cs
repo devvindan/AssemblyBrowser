@@ -12,7 +12,7 @@ namespace AssemblyBrowserTests
     {
         private Result result;
         private Type testClassType;
-        private string dllPath = "./AssembyBrowserUnitTest.dll";
+        private string dllPath = "./AssemblyBrowserTests.dll";
 
         [TestInitialize]
         public void Initialize()
