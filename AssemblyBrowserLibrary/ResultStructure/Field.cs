@@ -17,10 +17,10 @@ namespace AssemblyBrowserLibrary.ResultStructure
         private string GetGenericType(Type[] t)
         {
             string result = "";
-            foreach (Type genericType in t)
+            foreach (var genericType in t)
             {
-                if (t.GetType().IsGenericType)
-                    result += "<" + GetGenericType(genericType.GetType().GenericTypeArguments) + ">";
+                if (genericType.IsGenericType)
+                    result += genericType.Name + "<" + GetGenericType(genericType.GenericTypeArguments) + ">";
                 else
                     result += genericType.Name + " ";
             }

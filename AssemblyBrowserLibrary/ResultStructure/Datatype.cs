@@ -76,7 +76,7 @@ namespace AssemblyBrowserLibrary.ResultStructure
 
         public Datatype(TypeInfo typeInfo)
         {
-            Name = TypeInfoDecoder.GetAtributes(typeInfo) + typeInfo.Name;
+            Name = TypeInfoDecoder.GetInfo(typeInfo) + typeInfo.Name;
 
             fields = new List<Field>();
             properties = new List<Property>();

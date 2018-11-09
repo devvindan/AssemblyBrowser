@@ -40,8 +40,8 @@ namespace AssemblyBrowserLibrary
         private static string GetTypeClass(Type typeInfo)
         {
             if (typeInfo.IsInterface) return "interface ";
-            if (typeInfo.IsValueType) return "struct ";
             if (typeInfo.IsEnum) return "enum ";
+            if (typeInfo.IsValueType) return "struct ";
             if (typeInfo.BaseType == typeof(MulticastDelegate)) return "delegate ";
             if (typeInfo.IsClass) return "class ";
 
@@ -50,7 +50,7 @@ namespace AssemblyBrowserLibrary
         }
 
         // get all information 
-        public static string GetAtributes(Type typeInfo)
+        public static string GetInfo(Type typeInfo)
         {
             return GetTypeModifiers(typeInfo) + GetTypeAtributes(typeInfo) + GetTypeClass(typeInfo);
         }

@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using AssemblyBrowserLibrary.ResultStructure;
 using AssemblyBrowserLibrary;
 using System.Linq;
+using System.Collections.Generic;
 
 
 namespace AssemblyBrowserTests
@@ -10,7 +11,11 @@ namespace AssemblyBrowserTests
     [TestClass]
     public class TestClass
     {
+
         private Result result;
+
+        public List<Dictionary<int, bool>> uselessList;
+
         private Type testClassType;
         private string dllPath = "./AssemblyBrowserTests.dll";
 
@@ -20,6 +25,44 @@ namespace AssemblyBrowserTests
             AssemblyReader asmInfoProcessor = new AssemblyReader();
             result = asmInfoProcessor.Read(dllPath);
             testClassType = typeof(TestClass);
+        }
+
+
+        [TestMethod]
+        public void TestGenericListAndModifiers()
+        {
+            List<Field> classFields = result.Namespaces[0].DataTypes[0].fields;
+
+            foreach (Field f in classFields)
+            {
+                if (f.name == "uselessList")
+                {
+                    Assert.AreEqual("private List`1<Dictionary`2<Int32 Boolean >>", f.type);
+                }
+            }
+
+        }
+
+        [TestMethod]
+        public void TestOtherDatatypes()
+        {
+
+            List<Datatype> types = result.Namespaces[0].DataTypes;
+
+            foreach (Datatype type in types)
+            {
+                Console.WriteLine(type.Name);
+                Assert.IsTrue((type.Name == "public sealed delegate uselessDelegate") ||
+                    (type.Name == "public sealed struct uselessStruct") ||
+                    (type.Name == "public sealed enum uselessEnum") ||
+                    (type.Name == "public abstract interface uselessInterface") || 
+                    (type.Name == "public  class TestClass") || 
+                    (type.Name == "private sealed class <>c"));
+
+            }
+
+            Assert.IsTrue(types.Count > 5);
+
         }
 
         // sanity check
@@ -81,4 +124,27 @@ namespace AssemblyBrowserTests
             Assert.AreEqual(actualCount, expectedCount);
         }
     }
+
+
+
+        public delegate void uselessDelegate();
+
+
+        public struct uselessStruct
+        {
+
+        }
+
+        public enum uselessEnum
+        {
+
+        }
+
+        public interface uselessInterface
+        {
+
+        }
+
+
+
 }

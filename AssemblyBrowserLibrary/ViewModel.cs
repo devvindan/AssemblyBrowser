@@ -34,10 +34,12 @@ namespace AssemblyBrowserLibrary
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            // if even is not null, invoke it
+            // if event is not null, invoke it
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+
+        // Command that executed when the button is clicked (to open assembly)
         public Command OpenCommand
         {
             get
